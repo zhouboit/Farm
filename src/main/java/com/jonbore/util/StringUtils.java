@@ -1,5 +1,6 @@
 package com.jonbore.util;
 
+import jersey.repackaged.com.google.common.collect.Maps;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -287,16 +288,48 @@ public class StringUtils {
         return o != null ? o.toString() : "";
     }
 
+    private char[] c32 = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'V', 'W', 'X', 'Y'};//不含I O S
+//    private char[] c32 = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J','K', 'L', 'M', 'N', 'O','P', 'Q', 'R','S','T', 'U', 'V'};//含I O S
+
+
+    /**
+     * @param original 原始十进制
+     * @param toRadix 需要转换为的进制 2 8 16 32
+     * @return
+     */
+    public String swRadix(Long original, int toRadix) {
+        String str = "";
+        if (toRadix == 0) {
+            try {
+                throw new Exception(" to radix must not void or zero ,please specify radix you want, example 2 8 16 32");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (toRadix == 32) {
+            str = dc232(original);
+        }
+        if (toRadix == 16) {
+            str = Integer.toHexString(Math.toIntExact(original));
+        }
+        if (toRadix == 8) {
+            str = Integer.toOctalString(Math.toIntExact(original));
+        }
+        if (toRadix == 2) {
+            str = Integer.toBinaryString(Math.toIntExact(original));
+        }
+        return str;
+    }
+
     /**
      * 十进制转换为32进制
+     *
      * @param original
      * @return
      */
-    public static String to32(Long original){
+    public String dc232(Long original) {
         String str = "";
         String bin = Integer.toBinaryString(Math.toIntExact(original));
-//        String[] c32 = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "T", "U", "V", "W", "X", "Y"};//不含I O S
-        String[] c32 = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I","J","K", "L", "M", "N", "O","P", "Q", "R","S","T", "U", "V"};//含I O S
         while (bin.length() > 0) {
             String bitBinary = bin;
             if (bin.length() > 5) {
@@ -311,28 +344,29 @@ public class StringUtils {
     }
 
     /**
-     *
-     * @param original 原始十进制
-     * @param toRadix 需要转换为的进制 2 8 16 32
+     * 32进制转为十进制
+     * @param original
      * @return
      */
-    public static String swRadix(Long original, int toRadix) throws Exception {
+    public String _322DC(String original) {
+        if(original == null || original.equals("")) {
+            try {
+                throw new Exception("original parameters must not be void");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         String str = "";
-        if (toRadix == 0) {
-            throw new Exception(" toRadix must not null or zero ,please specify radix you want, example 2 8 16 32");
+        Map<Character, Integer> map32 = Maps.newHashMap();
+        for (int i = 0; i < c32.length; i++) {
+            map32.put(c32[i], i);
         }
-        if (toRadix == 32) {
-            str = to32(original);
+        char[] oris = original.toCharArray();
+        String binaryStr = "";
+        for (char c : oris) {
+            binaryStr = binaryStr + ("00000" + Integer.toBinaryString(map32.get(c))).substring(("00000" + Integer.toBinaryString(map32.get(c))).length() - 5);
         }
-        if (toRadix == 16) {
-            str = Integer.toHexString(Math.toIntExact(original));
-        }
-        if (toRadix == 8) {
-            str = Integer.toOctalString(Math.toIntExact(original));
-        }
-        if (toRadix == 2) {
-            str = Integer.toBinaryString(Math.toIntExact(original));
-        }
+        str = Integer.valueOf(binaryStr, 2).toString();
         return str;
     }
 
