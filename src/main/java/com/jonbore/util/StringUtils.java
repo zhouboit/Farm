@@ -286,4 +286,54 @@ public class StringUtils {
     public static String toString(Object o) {
         return o != null ? o.toString() : "";
     }
+
+    /**
+     * 十进制转换为32进制
+     * @param original
+     * @return
+     */
+    public static String to32(Long original){
+        String str = "";
+        String bin = Integer.toBinaryString(Math.toIntExact(original));
+//        String[] c32 = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "T", "U", "V", "W", "X", "Y"};//不含I O S
+        String[] c32 = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I","J","K", "L", "M", "N", "O","P", "Q", "R","S","T", "U", "V"};//含I O S
+        while (bin.length() > 0) {
+            String bitBinary = bin;
+            if (bin.length() > 5) {
+                bitBinary = bin.substring(bin.length() - 5);
+                bin = bin.substring(0, bin.length() - 5);
+            } else {
+                bin = "";
+            }
+            str = c32[Integer.valueOf(bitBinary, 2)] + str;
+        }
+        return str;
+    }
+
+    /**
+     *
+     * @param original 原始十进制
+     * @param toRadix 需要转换为的进制 2 8 16 32
+     * @return
+     */
+    public static String swRadix(Long original, int toRadix) throws Exception {
+        String str = "";
+        if (toRadix == 0) {
+            throw new Exception(" toRadix must not null or zero ,please specify radix you want, example 2 8 16 32");
+        }
+        if (toRadix == 32) {
+            str = to32(original);
+        }
+        if (toRadix == 16) {
+            str = Integer.toHexString(Math.toIntExact(original));
+        }
+        if (toRadix == 8) {
+            str = Integer.toOctalString(Math.toIntExact(original));
+        }
+        if (toRadix == 2) {
+            str = Integer.toBinaryString(Math.toIntExact(original));
+        }
+        return str;
+    }
+
 }
