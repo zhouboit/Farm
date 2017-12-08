@@ -223,6 +223,18 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.40</version>
         </dependency>
+        <!-- groovy -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.4.12</version>
+        </dependency>
+        <!--spark-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>2.2.0</version>
+        </dependency>
     </dependencies>
 
     <build>
