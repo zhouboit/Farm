@@ -1,6 +1,5 @@
 package com.jonbore.util;
 
-import com.alibaba.fastjson.JSON;
 import jersey.repackaged.com.google.common.collect.Maps;
 import org.apache.commons.compress.utils.Lists;
 import org.junit.Test;
