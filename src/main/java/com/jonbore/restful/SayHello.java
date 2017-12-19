@@ -3,14 +3,18 @@ package com.jonbore.restful;
 import com.alibaba.fastjson.JSON;
 import com.jonbore.domain.entity.User;
 import com.jonbore.util.FileUtils;
+import com.jonbore.util.KafkaProducer;
 import com.jonbore.util.ZipArchiveUtil;
+import jersey.repackaged.com.google.common.collect.Maps;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by bo.zhou1 on 2017/11/7.
@@ -70,6 +74,20 @@ public class SayHello {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
+    }
+
+    @GET
+    @Path("kafka")
+    @Produces("text/plain")
+    public String writeFile(@QueryParam("key") String key, @QueryParam("value") String value) {
+        String result = "";
+        KafkaProducer kafkaProducer = new KafkaProducer();
+        kafkaProducer.producerCreate(key, value);
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("key", key);
+        params.put("value", value);
+        result = JSON.toJSONString(params);
         return result;
     }
 }
