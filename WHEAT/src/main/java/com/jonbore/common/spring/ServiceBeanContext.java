@@ -1,7 +1,8 @@
 package com.jonbore.common.spring;
 
+import com.jonbore.common.utils.PropertiesUtil;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 public class ServiceBeanContext {
 
@@ -21,7 +22,7 @@ public class ServiceBeanContext {
 	}
 
 	public void loadContext(String path){
-		ctx = new ClassPathXmlApplicationContext(path);
+		ctx = new FileSystemXmlApplicationContext(System.getProperty(PropertiesUtil.getProperties("configs.res.path.sys.key")) + "/" + path);
 	}
 
 	public <T> T getBean(String bean) {
