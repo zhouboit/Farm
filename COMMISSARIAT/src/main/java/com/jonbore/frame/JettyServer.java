@@ -1,29 +1,40 @@
-package com.jonbore.main;
+package com.jonbore.frame;
 
-import com.jonbore.common.utils.PropertiesUtil;
+import com.jonbore.utils.common.PropertiesUtil;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-
 /**
- * Created by bo.zhou1 on 2017/11/7.
+ * Created with IntelliJ IDEA.
+ * Description: jetty server
+ * User: Jonbo
+ * Date: 2017-12-24
+ * Time: 20:31
  */
-public class StartServer {
+public class JettyServer {
 
-    private static Logger logger = Logger.getLogger(StartServer.class);
+    private static Logger logger = Logger.getLogger(JettyServer.class);
 
-    public static void main(String[] args) {
-        logger.info("server starting......");
+    /**
+     * init a jetty server, use the port and contextPath
+     *
+     * @param port        server listen port
+     * @param contextPath webApp publish root prefix,start with '/'
+     * @param serverName  init jetty server name, distinguish to other server
+     */
+    public static void startServer(int port, String contextPath, String serverName) {
+        logger.info(serverName + " server starting......");
         PropertiesUtil.init();
-        Server server = new Server(8080);
+        //port contextPath
+        Server server = new Server(port);
         String webBase = Thread.currentThread().getClass().getResource("/").toString().replace("target/classes/", PropertiesUtil.getProperties("web.res.path"));
         String resourceBase = Thread.currentThread().getClass().getResource("/").toString().replace("target/classes/", PropertiesUtil.getProperties("configs.res.path"));
-        logger.info("webPath:" + webBase);
-        logger.info("configsPath:" + resourceBase);
+        logger.info(serverName + " server webPath:" + webBase);
+        logger.info(serverName + " server configsPath:" + resourceBase);
         System.setProperty(PropertiesUtil.getProperties("configs.res.path.sys.key"), resourceBase);
         WebAppContext webapp = new WebAppContext();
-        webapp.setContextPath("/farm");
+        webapp.setContextPath(contextPath);
         webapp.setResourceBase(webBase);
         webapp.setDescriptor(webBase + "/WEB-INF/web.xml");
         webapp.setParentLoaderPriority(true);
@@ -32,7 +43,7 @@ public class StartServer {
         server.setHandler(webapp);
         try {
             server.start();
-            logger.info("start successfully");
+            logger.info(serverName + " server start successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }

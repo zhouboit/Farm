@@ -1,6 +1,6 @@
-package com.jonbore.common.spring;
+package com.jonbore.init;
 
-import com.jonbore.common.utils.PropertiesUtil;
+import com.jonbore.utils.common.PropertiesUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 

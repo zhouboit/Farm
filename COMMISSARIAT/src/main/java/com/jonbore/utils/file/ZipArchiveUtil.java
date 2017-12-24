@@ -1,14 +1,17 @@
-package com.jonbore.util;
+package com.jonbore.utils.file;
 
+import com.jonbore.utils.common.StringUtils;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.io.*;
 
 public class ZipArchiveUtil {
+    private static Logger logger = Logger.getLogger(ZipArchiveUtil.class);
 
     private static final Integer BUFF_SIZE = 1024;
 

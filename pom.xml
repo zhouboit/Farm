@@ -9,6 +9,7 @@
     <modules>
         <module>WHEAT</module>
         <module>CORN</module>
+        <module>COMMISSARIAT</module>
     </modules>
     <name>Farm</name>
     <url>http://maven.apache.org</url>
@@ -25,7 +26,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.jonbore.main.StartServer</mainClass>
+                            <mainClass>com.jonbore.main.CornServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

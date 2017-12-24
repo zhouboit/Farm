@@ -1,10 +1,12 @@
-package com.jonbore.util;
+package com.jonbore.utils.file;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.io.*;
 
 public class FileUtils {
+    private static Logger logger = Logger.getLogger(FileUtils.class);
 
     /**
      * 将字符串写入制定路径下的文件

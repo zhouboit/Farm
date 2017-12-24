@@ -1,9 +1,9 @@
-package com.jonbore.util;
+package com.jonbore.utils.common;
 
-import jersey.repackaged.com.google.common.collect.Maps;
+
+import com.google.common.collect.Maps;
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -18,7 +18,8 @@ import java.util.regex.Pattern;
  * 对字符处理的公共类
  */
 public class StringUtils {
-    private static final Log log = LogFactory.getLog(StringUtils.class);
+    private static Logger logger = Logger.getLogger(StringUtils.class);
+
     public static String GBKToUTF(String str) {
         String utfStr = null;
         try {
@@ -58,7 +59,7 @@ public class StringUtils {
             byte[] bytes = digester.digest();
             passStr = new String(Hex.encodeHex(bytes));
         } catch (Exception e) {
-            log.error("解密失败！", e);
+            logger.error("解密失败！", e);
         }
         return passStr;
     }

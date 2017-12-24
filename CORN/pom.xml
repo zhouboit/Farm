@@ -7,27 +7,25 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>corn</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
     <name>corn Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty</artifactId>
-            <version>3.8.0.Final</version>
+            <groupId>com.jonbore</groupId>
+            <artifactId>commissariat</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
+        <!--netty start-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.12.Final</version>
         </dependency>
+        <!--netty end-->
+
     </dependencies>
     <build>
         <finalName>corn</finalName>

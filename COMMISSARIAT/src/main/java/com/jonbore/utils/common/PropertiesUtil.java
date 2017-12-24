@@ -1,12 +1,14 @@
-package com.jonbore.common.utils;
+package com.jonbore.utils.common;
 
-import com.jonbore.util.StringUtils;
+
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
 public class PropertiesUtil {
+    private static Logger logger = Logger.getLogger(PropertiesUtil.class);
 
     private static Properties properties = new Properties();
 

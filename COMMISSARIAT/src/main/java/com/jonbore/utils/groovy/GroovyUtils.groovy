@@ -1,7 +1,12 @@
+package com.jonbore.utils.groovy
+
 import groovy.xml.MarkupBuilder
 import groovy.xml.StreamingMarkupBuilder
+import org.apache.log4j.Logger
 
 class GroovyUtils {
+
+    private static Logger logger = Logger.getLogger(GroovyUtils.class);
 
     static void main(String[] args) {
 //        buildXml()

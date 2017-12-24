@@ -1,4 +1,4 @@
-package com.jonbore.domain.entity;
+package com.jonbore.entity.wheat;
 
 /**
  * Created by Jonbo on 2017/11/11.

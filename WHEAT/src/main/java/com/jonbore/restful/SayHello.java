@@ -1,10 +1,10 @@
 package com.jonbore.restful;
 
 import com.alibaba.fastjson.JSON;
-import com.jonbore.domain.entity.User;
-import com.jonbore.util.FileUtils;
+import com.jonbore.entity.wheat.User;
+import com.jonbore.utils.file.FileUtils;
 import com.jonbore.util.KafkaProducer;
-import com.jonbore.util.ZipArchiveUtil;
+import com.jonbore.utils.file.ZipArchiveUtil;
 import jersey.repackaged.com.google.common.collect.Maps;
 
 import javax.ws.rs.GET;
