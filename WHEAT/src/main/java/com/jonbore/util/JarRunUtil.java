@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class JarRunUtil {
     private static String CLAZZ = "com.mes.agent.main.JarTest";
-    private static String DIR = "D:\\tools\\repository\\com\\mes\\MES-Agent\\1.0\\MES-Agent-1.0.jar";
+    private static String JARDIR = "D:\\tools\\repository\\com\\mes\\MES-Agent\\1.0\\MES-Agent-1.0.jar";
     private static String CLASSDIR = "E:\\hirain\\IOV-MES\\MES-Agent\\target\\classes";
 
     public static void main(String[] args) throws MalformedURLException, ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
