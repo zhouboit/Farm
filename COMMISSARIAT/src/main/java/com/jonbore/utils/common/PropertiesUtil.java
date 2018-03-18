@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.URL;
 import java.util.Properties;
 
 public class PropertiesUtil {
@@ -14,8 +15,8 @@ public class PropertiesUtil {
 
     public static void init() {
         try {
-            File config = new File(PropertiesUtil.class.getResource("/configs").toString().substring(6));
-            File[] configs = config.listFiles();
+            File configsDir = new File(PropertiesUtil.class.getResource("/configs").getFile());
+            File[] configs = configsDir.listFiles();
             for (File file : configs) {
                 if (file.getName().endsWith(".properties")) {
                     FileInputStream in = new FileInputStream(file);
