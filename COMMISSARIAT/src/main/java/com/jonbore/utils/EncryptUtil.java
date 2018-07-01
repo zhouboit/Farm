@@ -31,7 +31,7 @@ public class EncryptUtil {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA");
             messageDigest.update(inputData);
-            sha = new BigInteger(messageDigest.digest());
+            sha = new BigInteger(messageDigest.digest()).abs();
         }catch (Exception e){
             e.printStackTrace();
         }
