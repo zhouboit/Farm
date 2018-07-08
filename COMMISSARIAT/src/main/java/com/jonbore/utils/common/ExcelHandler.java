@@ -3,20 +3,21 @@ package com.jonbore.utils.common;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.ws.rs.core.StreamingOutput;
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
 
 /**
  * @author xiuyou.xu
@@ -114,6 +115,39 @@ public class ExcelHandler {
             }
             ret.add(record);
         }
+    }
+
+    public static String readCell(Cell cell){
+
+        String value = null;
+        if (cell == null) {
+            return value;
+        }
+        switch (cell.getCellTypeEnum()) {
+            case NUMERIC:
+                DecimalFormat df = new DecimalFormat("0");
+                value = df.format(cell.getNumericCellValue());
+                break;
+            case STRING:
+                value = cell.getStringCellValue();
+                break;
+            case BOOLEAN:
+                value = cell.getBooleanCellValue() + "";
+                break;
+            case FORMULA:
+                value = cell.getCellFormula() + "";
+                break;
+            case BLANK:
+                value = "";
+                break;
+            case ERROR:
+                value = "error";
+                break;
+            default:
+                value = "unknown type";
+                break;
+        }
+        return value;
     }
 
     /**
