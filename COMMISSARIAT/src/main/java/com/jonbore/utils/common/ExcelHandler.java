@@ -118,10 +118,9 @@ public class ExcelHandler {
     }
 
     public static String readCell(Cell cell){
-
-        String value = null;
+        String value = "";
         if (cell == null) {
-            return value;
+            return null;
         }
         switch (cell.getCellTypeEnum()) {
             case NUMERIC:
