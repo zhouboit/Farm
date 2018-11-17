@@ -6,21 +6,24 @@ import com.jonbore.utils.file.FileUtils;
 import com.jonbore.util.KafkaProducer;
 import com.jonbore.utils.file.ZipArchiveUtil;
 import jersey.repackaged.com.google.common.collect.Maps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
 /**
- * Created by bo.zhou1 on 2017/11/7.
+ *
+ * @author bo.zhou1
+ * @date 2017/11/7
  */
 @Path("hello")
 public class SayHello {
+
+    private static Logger logger = LoggerFactory.getLogger(SayHello.class);
 
     @GET
     @Path("sayHello")
@@ -29,6 +32,17 @@ public class SayHello {
         User user = new User();
         user.setName("jonbore");
         user.setPassword("123456");
+        logger.info("name: " + user.getName() + "; password: " + user.getPassword());
+        return "name: " + user.getName() + "; password: " + user.getPassword();
+    }
+
+    @POST
+    @Path("hello")
+    @Produces("text/plain")
+    public String sayHello(User user) {
+        user.setName(user.getName() + System.currentTimeMillis());
+        user.setPassword(user.getPassword() + System.currentTimeMillis());
+        logger.info("name: " + user.getName() + "; password: " + user.getPassword());
         return "name: " + user.getName() + "; password: " + user.getPassword();
     }
 
